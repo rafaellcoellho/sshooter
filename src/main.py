@@ -2,10 +2,6 @@ import arcade
 import ship
 import defines
 
-SCREEN_WIDTH = 600
-SCREEN_HEIGHT = 400
-SCREEN_TITLE = "Space Invaders"
-
 class Game(arcade.Window):
     def __init__(self, width, height, title):
         super().__init__(width, height, title)

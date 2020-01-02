@@ -30,7 +30,9 @@ class Game(arcade.Window):
             self.ship.set_dir(d.directions.RIGHT)
 
     def on_key_release(self, key, key_modifiers):
-        if key != arcade.key.SPACE:
+        if key == arcade.key.LEFT and self.ship.dir == d.directions.LEFT:
+            self.ship.set_dir(d.directions.STOP)
+        elif key == arcade.key.RIGHT and self.ship.dir == d.directions.RIGHT:
             self.ship.set_dir(d.directions.STOP)
 
 

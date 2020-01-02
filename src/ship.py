@@ -11,7 +11,7 @@ class Ship:
         arcade.draw_rectangle_filled(self.x, 10, 20, 20, arcade.color.WHITE)
 
     def move(self):
-        self.x += self.dir
-    
+        self.x += self.dir*self.speed
+
     def set_dir(self, direction):
-        self.dir = direction*self.speed
+        self.dir = direction

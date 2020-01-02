@@ -1,6 +1,6 @@
 import arcade
 import ship
-import directions as d
+import defines
 
 SCREEN_WIDTH = 600
 SCREEN_HEIGHT = 400
@@ -11,7 +11,7 @@ class Game(arcade.Window):
         super().__init__(width, height, title)
         arcade.set_background_color(arcade.color.BLACK)
 
-        self.ship = ship.Ship(SCREEN_WIDTH/2)
+        self.ship = ship.Ship(defines.window.WIDTH/2)
 
     def setup(self):
         pass
@@ -25,19 +25,19 @@ class Game(arcade.Window):
 
     def on_key_press(self, key, key_modifiers):
         if key == arcade.key.LEFT:
-            self.ship.set_dir(d.directions.LEFT)
+            self.ship.set_dir(defines.directions.LEFT)
         elif key == arcade.key.RIGHT:
-            self.ship.set_dir(d.directions.RIGHT)
+            self.ship.set_dir(defines.directions.RIGHT)
 
     def on_key_release(self, key, key_modifiers):
-        if key == arcade.key.LEFT and self.ship.dir == d.directions.LEFT:
-            self.ship.set_dir(d.directions.STOP)
-        elif key == arcade.key.RIGHT and self.ship.dir == d.directions.RIGHT:
-            self.ship.set_dir(d.directions.STOP)
+        if key == arcade.key.LEFT and self.ship.dir == defines.directions.LEFT:
+            self.ship.set_dir(defines.directions.STOP)
+        elif key == arcade.key.RIGHT and self.ship.dir == defines.directions.RIGHT:
+            self.ship.set_dir(defines.directions.STOP)
 
 
 def main():
-    game = Game(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
+    game = Game(defines.window.WIDTH, defines.window.HEIGHT, defines.TITLE)
     game.setup()
     arcade.run()
 

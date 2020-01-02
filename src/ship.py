@@ -1,10 +1,10 @@
 import arcade
-import directions as d
+import defines
 
 class Ship:
     def __init__(self, initial_x):
         self.x = initial_x
-        self.dir = d.directions.STOP
+        self.dir = defines.directions.STOP
         self.speed = 5
 
     def show(self):

@@ -11,19 +11,16 @@ class Game(arcade.Window):
         self.ship_sprite = None
 
     def setup(self):
-        self.all_sprites_list = arcade.SpriteList()
-
         self.ship = ship.Ship()
         self.ship.center_x = defines.window.WIDTH / 2
         self.ship.center_y = 25
-        self.all_sprites_list.append(self.ship)
 
     def on_draw(self):
         arcade.start_render()
-        self.all_sprites_list.draw()
+        self.ship.draw()
 
     def on_update(self, delta_time):
-        self.all_sprites_list.update()
+        self.ship.update()
 
     def on_key_press(self, key, key_modifiers):
         if key == arcade.key.LEFT:

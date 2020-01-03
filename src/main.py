@@ -7,17 +7,23 @@ class Game(arcade.Window):
         super().__init__(width, height, title)
         arcade.set_background_color(arcade.color.BLACK)
 
-        self.ship = ship.Ship(defines.window.WIDTH/2)
+        self.all_sprites_list = None
+        self.ship_sprite = None
 
     def setup(self):
-        pass
+        self.all_sprites_list = arcade.SpriteList()
+
+        self.ship = ship.Ship()
+        self.ship.center_x = defines.window.WIDTH / 2
+        self.ship.center_y = 25
+        self.all_sprites_list.append(self.ship)
 
     def on_draw(self):
         arcade.start_render()
-        self.ship.show()
+        self.all_sprites_list.draw()
 
     def on_update(self, delta_time):
-        self.ship.move()
+        self.all_sprites_list.update()
 
     def on_key_press(self, key, key_modifiers):
         if key == arcade.key.LEFT:

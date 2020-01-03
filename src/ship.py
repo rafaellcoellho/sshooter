@@ -1,17 +1,24 @@
 import arcade
 import defines
 
-class Ship:
-    def __init__(self, initial_x):
-        self.x = initial_x
+class Ship(arcade.Sprite):
+    def __init__(self):
+        super().__init__()
+
+        texture = arcade.load_texture('./sprites/ship.png')
+        self.textures.append(texture)
+        self.set_texture(0)
+
         self.dir = defines.directions.STOP
         self.speed = 5
 
-    def show(self):
-        arcade.draw_rectangle_filled(self.x, 10, 20, 20, arcade.color.WHITE)
+    def update(self):
+        self.center_x += self.dir*self.speed
 
-    def move(self):
-        self.x += self.dir*self.speed
+        if self.left < 0:
+            self.left = 0
+        elif self.right > defines.window.WIDTH - 1:
+            self.right = defines.window.WIDTH - 1
 
     def set_dir(self, direction):
         self.dir = direction

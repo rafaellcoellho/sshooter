@@ -36,6 +36,8 @@ class Game(arcade.Window):
             self.ship.set_dir(defines.directions.STOP)
         elif key == arcade.key.RIGHT and self.ship.dir == defines.directions.RIGHT:
             self.ship.set_dir(defines.directions.STOP)
+        elif key == arcade.key.ESCAPE:
+            arcade.close_window()
 
 
 def main():

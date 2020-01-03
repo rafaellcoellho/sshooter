@@ -13,8 +13,6 @@ class Game(arcade.Window):
 
     def setup(self):
         self.ship = ship.Ship()
-        self.ship.center_x = defines.window.WIDTH / 2
-        self.ship.center_y = 25
 
     def on_draw(self):
         arcade.start_render()

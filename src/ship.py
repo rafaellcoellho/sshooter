@@ -8,7 +8,9 @@ class Ship(arcade.Sprite):
         texture = arcade.load_texture(':resources:images/space_shooter/playerShip1_orange.png', scale=0.5)
         self.textures.append(texture)
         self.set_texture(0)
-
+        
+        self.center_x = defines.window.WIDTH / 2
+        self.center_y = 25
         self.dir = defines.directions.STOP
         self.speed = 5
 

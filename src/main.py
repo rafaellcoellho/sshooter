@@ -1,14 +1,15 @@
 import arcade
-import ship
 import defines
+import ship
+import bullet
 
 class Game(arcade.Window):
     def __init__(self, width, height, title):
         super().__init__(width, height, title)
         arcade.set_background_color(arcade.color.BLACK)
 
-        self.all_sprites_list = None
-        self.ship_sprite = None
+        self.ship = None
+        self.bullets = arcade.SpriteList()
 
     def setup(self):
         self.ship = ship.Ship()
@@ -18,9 +19,15 @@ class Game(arcade.Window):
     def on_draw(self):
         arcade.start_render()
         self.ship.draw()
+        self.bullets.draw()
 
     def on_update(self, delta_time):
         self.ship.update()
+        self.bullets.update()
+
+        for bullet in self.bullets:
+            if bullet.top > defines.window.HEIGHT or bullet.top < 0:
+                bullet.remove_from_sprite_lists()
 
     def on_key_press(self, key, key_modifiers):
         if key == arcade.key.LEFT:
@@ -33,6 +40,14 @@ class Game(arcade.Window):
             self.ship.set_dir(defines.directions.STOP)
         elif key == arcade.key.RIGHT and self.ship.dir == defines.directions.RIGHT:
             self.ship.set_dir(defines.directions.STOP)
+        elif key == arcade.key.SPACE:
+            self.bullets.append(
+                bullet.Bullet(
+                    self.ship.center_x,
+                    defines.angles.FACE_UP,
+                    bottom=self.ship.top
+                )
+            )
         elif key == arcade.key.ESCAPE:
             arcade.close_window()
 

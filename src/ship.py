@@ -5,7 +5,7 @@ class Ship(arcade.Sprite):
     def __init__(self):
         super().__init__()
 
-        texture = arcade.load_texture(':resources:images/space_shooter/playerShip1_orange.png', scale=0.5)
+        texture = arcade.load_texture(':resources:images/space_shooter/playerShip1_orange.png', scale=0.35)
         self.textures.append(texture)
         self.set_texture(0)
         

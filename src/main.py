@@ -2,6 +2,7 @@ import arcade
 import defines
 import ship
 import bullet
+import alien
 
 class Game(arcade.Window):
     def __init__(self, width, height, title):
@@ -10,18 +11,35 @@ class Game(arcade.Window):
 
         self.ship = None
         self.bullets = arcade.SpriteList()
+        self.aliens = arcade.SpriteList()
 
     def setup(self):
         self.ship = ship.Ship()
+        for i in range(6):
+            self.aliens.append(
+                alien.Alien(i * 80 + 80, defines.window.HEIGHT-60)
+            )
 
     def on_draw(self):
         arcade.start_render()
         self.ship.draw()
         self.bullets.draw()
+        self.aliens.draw()
 
     def on_update(self, delta_time):
         self.ship.update()
         self.bullets.update()
+        self.aliens.update()
+
+        edge = False
+
+        for alien in self.aliens:
+            if alien.right > defines.window.WIDTH or alien.left < 0:
+                edge = True
+        
+        if edge == True:
+            for alien in self.aliens:
+                alien.shift_down()
 
         for bullet in self.bullets:
             if bullet.top > defines.window.HEIGHT or bullet.top < 0:

@@ -5,7 +5,7 @@ class Bullet(arcade.Sprite):
     def __init__(self, initial_x, angle, top=None, bottom=None):
         super().__init__()
 
-        texture = arcade.load_texture(':resources:images/space_shooter/laserBlue01.png', scale=0.5)
+        texture = arcade.load_texture(':resources:images/space_shooter/laserBlue01.png', scale=0.35)
         self.textures.append(texture)
         self.set_texture(0)
 

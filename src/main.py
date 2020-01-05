@@ -31,12 +31,17 @@ class Game(arcade.Window):
         self.bullets.update()
         self.aliens.update()
 
-        edge = False
+        for bullet in self.bullets:
+            aliens_hit = arcade.check_for_collision_with_list(bullet, self.aliens)
+            if aliens_hit != []:
+                aliens_hit[0].remove_from_sprite_lists()
+                bullet.remove_from_sprite_lists()
 
+        edge = False
         for alien in self.aliens:
             if alien.right > defines.window.WIDTH or alien.left < 0:
                 edge = True
-        
+                break
         if edge == True:
             for alien in self.aliens:
                 alien.shift_down()

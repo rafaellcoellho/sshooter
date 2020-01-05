@@ -1,8 +1,9 @@
 import arcade
-import defines
-import ship
-import bullet
-import alien
+from defines import window,directions,angles, TITLE
+from ship import Ship
+from bullet import Bullet
+from alien import Alien
+from random import randrange
 
 class Game(arcade.Window):
     def __init__(self, width, height, title):
@@ -14,10 +15,10 @@ class Game(arcade.Window):
         self.aliens = arcade.SpriteList()
 
     def setup(self):
-        self.ship = ship.Ship()
+        self.ship = Ship()
         for i in range(6):
             self.aliens.append(
-                alien.Alien(i * 80 + 80, defines.window.HEIGHT-60)
+                Alien(i * 80 + 80, window.HEIGHT-60)
             )
 
     def on_draw(self):
@@ -31,41 +32,55 @@ class Game(arcade.Window):
         self.bullets.update()
         self.aliens.update()
 
+        in_edge = False
+        for alien in self.aliens:
+            if randrange(200) == 0:
+                self.bullets.append(
+                    Bullet(
+                        alien.center_x,
+                        angles.FACE_DOWN,
+                        top=alien.bottom
+                    )
+                )
+            if alien.right > window.WIDTH or alien.left < 0:
+                in_edge = True
+                break
+        if in_edge:
+            for alien in self.aliens:
+                alien.shift_down()
+
         for bullet in self.bullets:
             aliens_hit = arcade.check_for_collision_with_list(bullet, self.aliens)
             if aliens_hit != []:
                 aliens_hit[0].remove_from_sprite_lists()
                 bullet.remove_from_sprite_lists()
+            
+            player_hit = arcade.check_for_collision(bullet, self.ship)
+            if player_hit:
+                print('Game Over')
+                arcade.close_window()
 
-        edge = False
-        for alien in self.aliens:
-            if alien.right > defines.window.WIDTH or alien.left < 0:
-                edge = True
-                break
-        if edge == True:
-            for alien in self.aliens:
-                alien.shift_down()
 
         for bullet in self.bullets:
-            if bullet.top > defines.window.HEIGHT or bullet.top < 0:
+            if bullet.top > window.HEIGHT or bullet.top < 0:
                 bullet.remove_from_sprite_lists()
 
     def on_key_press(self, key, key_modifiers):
         if key == arcade.key.LEFT:
-            self.ship.set_dir(defines.directions.LEFT)
+            self.ship.set_dir(directions.LEFT)
         elif key == arcade.key.RIGHT:
-            self.ship.set_dir(defines.directions.RIGHT)
+            self.ship.set_dir(directions.RIGHT)
 
     def on_key_release(self, key, key_modifiers):
-        if key == arcade.key.LEFT and self.ship.dir == defines.directions.LEFT:
-            self.ship.set_dir(defines.directions.STOP)
-        elif key == arcade.key.RIGHT and self.ship.dir == defines.directions.RIGHT:
-            self.ship.set_dir(defines.directions.STOP)
+        if key == arcade.key.LEFT and self.ship.dir == directions.LEFT:
+            self.ship.set_dir(directions.STOP)
+        elif key == arcade.key.RIGHT and self.ship.dir == directions.RIGHT:
+            self.ship.set_dir(directions.STOP)
         elif key == arcade.key.SPACE:
             self.bullets.append(
-                bullet.Bullet(
+                Bullet(
                     self.ship.center_x,
-                    defines.angles.FACE_UP,
+                    angles.FACE_UP,
                     bottom=self.ship.top
                 )
             )
@@ -74,7 +89,7 @@ class Game(arcade.Window):
 
 
 def main():
-    game = Game(defines.window.WIDTH, defines.window.HEIGHT, defines.TITLE)
+    game = Game(window.WIDTH, window.HEIGHT, TITLE)
     game.setup()
     arcade.run()
 

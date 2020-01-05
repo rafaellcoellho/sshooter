@@ -1,5 +1,5 @@
 import arcade
-from defines import window,directions,angles, TITLE
+from defines import window,directions,angles,TITLE
 from ship import Ship
 from bullet import Bullet
 from alien import Alien

@@ -59,9 +59,7 @@ class Game(arcade.Window):
             if player_hit:
                 print('Game Over')
                 arcade.close_window()
-
-
-        for bullet in self.bullets:
+            
             if bullet.top > window.HEIGHT or bullet.top < 0:
                 bullet.remove_from_sprite_lists()
 

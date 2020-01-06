@@ -1,6 +1,12 @@
-# Space Invaders
+# SShooter
 
-Space invaders made with python and arcade.
+SShooter is made with python and arcade.
+
+<p align="center">
+	<a href="">
+		<img alt="Game" src="demo.png" width="200px">
+	</a>
+</p>
 
 ## How to run
 

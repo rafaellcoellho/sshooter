@@ -15,4 +15,4 @@ class angles(IntEnum):
     FACE_UP = 90
     FACE_DOWN = -90
 
-TITLE = 'space invaders'
+TITLE = 'sshoter'

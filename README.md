@@ -13,13 +13,13 @@ SShooter is made with python and arcade.
 Create a virtual env:
 
 ```bash
-$ mkvirtualenv --python=python3.6 space-invaders
+$ mkvirtualenv --python=python3.6 sshooter
 ```
 
 If you alredy have the enviroment:
 
 ```bash
-$ workon space-invaders
+$ workon sshooter
 ```
 
 Install all dependencies: 

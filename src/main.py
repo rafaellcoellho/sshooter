@@ -31,6 +31,10 @@ class Game(arcade.Window):
         self.ship.update()
         self.bullets.update()
         self.aliens.update()
+        
+        if not self.aliens:
+            print('Game Over... for the bad guys, congratulations!')
+            arcade.close_window()
 
         in_edge = False
         for alien in self.aliens:

@@ -4,7 +4,7 @@ SShooter is made with python and arcade.
 
 <p align="center">
 	<a href="">
-		<img alt="Game" src="demo.png" width="200px">
+		<img alt="Game" src="demo.png" width="300px">
 	</a>
 </p>
 
